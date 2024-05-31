@@ -10,12 +10,13 @@ var geoJsonLayer = L.geoJSON().addTo(map);
 var markersLayerGroup = L.layerGroup().addTo(map);
 
 function cracin_search() {
+    var route_password = document.getElementById("route_password").value;
 
     $.ajax({
         url: '/cracin_search',
         method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({  }),
+        dataType: 'json',
+        data: { 'route_pw': route_password },
         success: function(response) {
             var geojsonData = response["trips"][0]["geometry"];
             geoJsonLayer.addData(geojsonData);
@@ -40,13 +41,15 @@ function cracin_search() {
 }
 
 function heatmap() {
+    var route_password = document.getElementById("route_password").value;
+
     $.ajax({
         url: '/heatmap',
         method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({  }),
+        dataType: 'json',
+        data: { 'route_pw': route_password },
         success: function(response) {
-            var heat = L.heatLayer(response, {blur: 50, radius:100, gradient: {0.1: 'blue', 0.2: 'lime', 0.3: 'red'}}).addTo(map);
+            var heat = L.heatLayer(response, {blur: 50, radius:100, gradient: {0.1: 'blue', 0.2: 'lime', 0.3: 'red'}}).addTo(markersLayerGroup);
         },
         error: function(error) {
             console.error("Error fetching heatmap data:", error);
