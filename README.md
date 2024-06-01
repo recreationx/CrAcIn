@@ -130,7 +130,7 @@ The CRACIN code is a code that is provided to patrolling officers on duty. The C
 
 When the buttons `Display` and `Heatmap` are pressed, you will be able to see the following:
 
-<img src="images/demo_two.png" alt="Mockup">
+<img src="images/demo_2.png" alt="Mockup">
 
 The application assumes that the patrolling officer is driving. On the left, the sequence of the stops needed to be taken on the patrolling route is shown. On the right, the patrolling route is shown in blue, with markers labelling the stops required to be taken, and a heatmap indicating the crime intensity at that particular area.
 
