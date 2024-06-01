@@ -35,6 +35,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#methodology">Methodology</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -95,26 +96,7 @@ It is recommended to run this within a virtual environment.
    ```sh
    flask run --app main
    ```
-
-For contributions, a `package-lock.json` file and `package.json` file is not provided in this repo.
-
-1. Install `node.js`
-2. Install `tailwindcss` and `daisyUI`. Refer to the websites for reference.
-* tailwind.config.js
-  ```javascipt
-  /** @type {import('tailwindcss').Config} */
-  module.exports = {
-    content: ["./templates/*.html", "./static/**/*.js"],
-    theme: {
-      extend: {},
-    },
-    plugins: [require("@tailwindcss/typography"), require("daisyui")],
-    daisyui: {
-      themes: ["dracula"],
-    },
-  };
-  ```
-3. Follow the instructions on tailwind's site.
+Refer to <a href="#contributions">Contributions</a> for `node.js` related matters.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -140,7 +122,7 @@ The application assumes that the patrolling officer is driving. On the left, the
 ## Methodology
 
 ### Crime Analysis
-We simulate a set of crime data with 10 crimes, and assign them their relative weights, on a scale of 1-5. The weights are determined by the severity of the crime, and is an average value collected from a survey of 5 individuals.
+We simulate a set of crime data with 10 crimes, and assign them their relative weights, on a scale of 1-5. The weights are determined by the severity of the crime, and is an averaged value collected from a survey of 5 individuals.
 ```python
         crime_weights = {
             "outrage_of_modesty": 3,
@@ -210,7 +192,29 @@ Project Link: [https://github.com/recreationx/CrAcIn](https://github.com/recreat
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Note to contributors
 
+For contributions, a `package-lock.json` file and `package.json` file is not provided in this repo.
+
+1. Install `node.js`
+2. Install `tailwindcss` and `daisyUI`. Refer to the websites for reference.
+* tailwind.config.js
+  ```javascipt
+  /** @type {import('tailwindcss').Config} */
+  module.exports = {
+    content: ["./templates/*.html", "./static/**/*.js"],
+    theme: {
+      extend: {},
+    },
+    plugins: [require("@tailwindcss/typography"), require("daisyui")],
+    daisyui: {
+      themes: ["dracula"],
+    },
+  };
+  ```
+3. Follow the instructions on tailwind's site.
+
+The project uses `black` as a Python formatter and `Prettier` for JS/CSS/HTML files.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
