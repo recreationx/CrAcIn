@@ -96,6 +96,26 @@ It is recommended to run this within a virtual environment.
    flask run --app main
    ```
 
+For contributions, a `package-lock.json` file and `package.json` file is not provided in this repo.
+
+1. Install `node.js`
+2. Install `tailwindcss` and `daisyUI`. Refer to the websites for reference.
+* tailwind.config.js
+  ```javascipt
+  /** @type {import('tailwindcss').Config} */
+  module.exports = {
+    content: ["./templates/*.html", "./static/**/*.js"],
+    theme: {
+      extend: {},
+    },
+    plugins: [require("@tailwindcss/typography"), require("daisyui")],
+    daisyui: {
+      themes: ["dracula"],
+    },
+  };
+  ```
+3. Follow the instructions on tailwind's site.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
