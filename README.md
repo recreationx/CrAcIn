@@ -136,6 +136,60 @@ The application assumes that the patrolling officer is driving. On the left, the
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- METHODOLOGY -->
+## Methodology
+
+### Crime Analysis
+We simulate a set of crime data with 10 crimes, and assign them their relative weights, on a scale of 1-5. The weights are determined by the severity of the crime, and is an average value collected from a survey of 5 individuals.
+```python
+        crime_weights = {
+            "outrage_of_modesty": 3,
+            "theft_in_dwelling": 2,
+            "voyeurism": 3,
+            "shop_theft": 1,
+            "rape": 5,
+            "murder": 5,
+            "littering": 1,
+            "jaywalking": 1,
+            "traffic_accident": 2,
+            "pickpocketing": 2,
+        }
+```
+From there, we collect data about crimes in Singapore. As data is not available, we decided to simulate data points ourselves (15 coordinates within 4 different regions, particularly `North`, `East`, `South` and `West`). We intend to generate an accurate index of the crime intensity of an area, in which the following method is taken.
+
+<img src="images/method.png" alt="Mockup">
+
+We take a "grid" on the map, that is approximately <strong>1 minute</strong> long along the latitude and longitude lines. From there, we collect data about crimes happening in that grid (denoted by X), specifically the type of crime and their frequency. We averaged the values to produce a generalized crime index for that area, which is then approximated to a single point O, which is the center of the grid square.
+
+Example data:
+```csv
+latitude, longitude, outrage_of_modesty, theft_in_dwelling, voyeurism, shop_theft, rape, murder, littering, jaywalking, traffic_accident, pickpocketing
+1.2818672, 103.8369766, 1, 1, 0, 2, 0, 0, 2, 2, 0, 0
+1.2808705, 103.8444822, 1, 2, 1, 0, 0, 0, 1, 2, 1, 1
+```
+From there, the data is recorded using a CSV, with the intensity of each crime on a scale of 1 - 5, and the coordinates being the centre of each grid square.
+Data should be added to `/data/` and loaded into the CRACIN platform (the filename is the code). We then calculate the final weightage and normalize the data to `0-1`, to be viewed on a heatmap.
+
+* Code snippets from `preprocess_data.py`
+```python
+        weighted_sum = sum(
+            int(self.crime_severity[crime]) * crime_weights[crime]
+            for crime in crime_weights
+        )
+```
+```python
+        weighted_sums = [coords.get_weight() for coords in self.data]
+        min_sum = min(weighted_sums)
+        max_sum = max(weighted_sums)
+
+        normalized_values = [
+            (value - min_sum) / (max_sum - min_sum) for value in weighted_sums
+        ]
+```
+This is then loaded into a visible heatmap, as seen above.
+
+### Route Optimization
+The problem of planning the patrol route is a generalization of the Travelling Salesman Problem. We proposed to use TSP together with a genetic algorithm to obtain the best model where the values converge effectively. However, due to time constraints, we resort to using `Open Source Routing Machine (OSRM)` that provides an API to solve TSP for us. We query this API for all routing problems.
 
 
 <!-- ROADMAP -->
