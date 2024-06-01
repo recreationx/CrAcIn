@@ -1,88 +1,118 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dracula">
-<head>
+  <head>
     <title>CrAcIn</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta charset="utf-8" />
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet-sidebar.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}" />    
-
-</head>
-<body>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/leaflet-sidebar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/output.css') }}"
+    />
+  </head>
+  <body>
     <div id="sidebar" class="sidebar collapsed">
-        <!-- Nav tabs -->
-        <div class="sidebar-tabs">
-            <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-            </ul>
+      <div class="sidebar-tabs">
+        <ul role="tablist">
+          <li>
+            <a href="#home" role="tab"><i class="fa fa-bars"></i></a>
+          </li>
+        </ul>
 
-            <ul role="tablist">
-                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
-            </ul>
+        <ul role="tablist">
+          <li>
+            <a href="#settings" role="tab"><i class="fa fa-gear"></i></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+          <h1 class="sidebar-header">
+            <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+
+          <div style="margin: 4px">
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Enter the CRACIN code:</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                class="input input-bordered input-primary w-full max-w-xs"
+                id="route_password"
+              />
+            </label>
+            <button class="btn btn-primary btn-sm" onclick="cracin_search()">
+              Display
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="heatmap()">
+              Heatmap
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="clear_route()">
+              Clear
+            </button>
+            <br />
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Stop</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Enter a code to view.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-
-        <!-- Tab panes -->
-        <div class="sidebar-content">
-            <div class="sidebar-pane" id="home">
-                <h1 class="sidebar-header">
-                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
-                </h1>
-
-                <div style="margin: 4px;">
-                    <label class="form-control w-full max-w-xs">
-                        <div class="label">
-                          <span class="label-text">Enter the CRACIN code:</span>
-                        </div>
-                        <input type="text" placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs" id="route_password">
-                    </label>
-                    <button class="btn btn-primary btn-sm" onclick="cracin_search()">Display</button> 
-                    <button class = "btn btn-primary btn-sm" onclick="heatmap()">Heatmap</button>
-                    <button class="btn btn-primary btn-sm" onclick="clear_route()">Clear</button>
-                    <br>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th>Stop</th>
-                            <th>Navigate</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th>1</th>
-                            <td>Enter a code to view.</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>  
-            </div>
-            <div class="sidebar-pane" id="settings">
-                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-                <div style="margin: 4px;">
-                </div>      
-            
-            </div>
+        <div class="sidebar-pane" id="settings">
+          <h1 class="sidebar-header">
+            Settings<span class="sidebar-close"
+              ><i class="fa fa-caret-left"></i
+            ></span>
+          </h1>
+          <div style="margin: 4px"></div>
         </div>
+      </div>
     </div>
 
     <div id="map" class="sidebar-map"></div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
     <script
-    src="https://code.jquery.com/jquery-3.7.1.js"
-    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/leaflet-sidebar.js') }}" ></script>
-    <script src="{{ url_for('static', filename='js/leaflet-heat.js') }}" ></script>
-    <script src="{{ url_for('static', filename='js/index.js') }}" ></script>
-</body>
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{ url_for('static', filename='js/leaflet-sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/leaflet-heat.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  </body>
 </html>

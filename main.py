@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request
 import preprocess_data
-import requests
 
 app = Flask(__name__)
+
+
 @app.route("/")
 def main():
     return render_template("index.html")
+
 
 @app.route("/cracin_search", methods=["POST"])
 def cracin_search():
@@ -14,7 +16,8 @@ def cracin_search():
     print(results)
     if results["code"] == "Ok":
         return results
-    return ''
+    return ""
+
 
 @app.route("/heatmap", methods=["POST"])
 def heatmap():

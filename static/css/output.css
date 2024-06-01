@@ -1624,13 +1624,15 @@ body {
   margin: 0;
 }
 
-html, body, #map {
+html,
+body,
+#map {
   height: 100%;
 }
 
 .lorem {
   font-style: italic;
-  color: #AAA;
+  color: #aaa;
 }
 
 #route_password {
@@ -1638,5 +1640,5 @@ html, body, #map {
 }
 
 .leaflet-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -3,23 +3,25 @@
 @tailwind utilities;
 
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
-html, body, #map {
-    height: 100%;
+html,
+body,
+#map {
+  height: 100%;
 }
 
 .lorem {
-    font-style: italic;
-    color: #AAA;
+  font-style: italic;
+  color: #aaa;
 }
 
 #route_password {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 .leaflet-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
