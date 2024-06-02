@@ -13,7 +13,6 @@
     Crime Activity Index (CrAcIn) Map
     <br />
     <br />
-    <a href="https://cracin.znan.dev"><strong>View Demo</strong></a>
   </p>
 </div>
 
